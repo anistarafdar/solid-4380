@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 class Keyboard {
 public:
     std::string getInput() {
@@ -20,16 +20,44 @@ public:
 // in the future). Note that each InputProcessor only needs to deal
 // with one device.
 class InputProcessor {
+	std::string devicetype;
 public:
+
+	
+	InputProcessor(std::string type) {
+		devicetype = type;
+	}
+
+
     void processInput() {
-        Keyboard keyboard;
-        std::string input = keyboard.getInput();
-        std::cout << "Processing: " << input;
+        std::string input;
+		
+		
+        if (devicetype == "keyboard") {
+            Keyboard keyboard;
+            input = keyboard.getInput();
+        } else if (devicetype == "mouse") {
+            Mouse mouse;
+            input = mouse.getInput();
+        } else {
+            input = "????";
+        }
+		
+		
+        std::cout << "Processing: " << input << "\n";
+
     }
 };
 
 // For demonstration
 int main() {
-    InputProcessor processor;
-    processor.processInput();
+
+    InputProcessor keyboardProcessor("keyboard");
+    InputProcessor mouseProcessor("mouse");
+    ///InputProcessor unknownProcessor("?");
+
+    keyboardProcessor.processInput();
+    mouseProcessor.processInput();
+    //unknownProcessor.processInput();
+
 }
