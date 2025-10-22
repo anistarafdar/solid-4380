@@ -1,5 +1,7 @@
 #include <iostream>
 #include <sstream>
+#include <string>
+
 
 class Report {
 public:
@@ -12,7 +14,7 @@ public:
 
 class ReportProcessor{
 public:
-    static int process(const Report& report) {
+    static int processData(const Report& report) {
         std::istringstream iss(report.data);
         int number, sum = 0;
         while (iss >> number) {
@@ -25,13 +27,13 @@ class ReportFormat{
 	public:
     static std::string format(const Report& report) {
 		//int result = processData(report)
-        return "<h1>" + report.title + "</h1>\n<p>" + report.title + ": " + std::to_string(processData(report)) + "</p>";
+        return "<h1>" + report.title + "</h1>\n<p>" + report.title + ": " + std::to_string(ReportProcessor::processData(report)) + "</p>";
     }
 
-
+};
 
 // Included for demonstration
 int main() {
     Report report("Total sales", "51 42 39 60");
-    std::cout << ReportFormatter::format(report);
+    std::cout << ReportFormat::format(report);
 }
