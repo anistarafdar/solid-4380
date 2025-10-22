@@ -2,27 +2,33 @@
 #include <iostream>
 
 class DiscountCalculator {
+	protected:
+		double discount = 1.00;
 public:
-    virtual double calculate(double amount) const {
-        return amount;
+
+    double calculate(double amount) const {
+        return amount * discount;
     }
 
     //{}
 };
 
 
+
 class LoyalCalculator : public DiscountCalculator {
 public:
-    double calculate(double amount) const override {
-        return amount * 0.95;
+    LoyalCalculator() {
+        discount = 0.95;
     }
 };
 
 
+
+
 class VIPCalculator : public DiscountCalculator {
 public:
-    double calculate(double amount) const override {
-        return amount * 0.90;
+    VIPCalculator() {
+        discount = 0.90;
     }
 };
 
