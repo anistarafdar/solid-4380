@@ -2,23 +2,55 @@
 
 class Bird {
 public:
-    virtual void fly() {
-        std::cout << "Bird is flying\n";
-    };
-    
+    // virtual void fly() {
+        // std::cout << "Bird is flying\n";
+    // };
+    std::string name = "Bird";
+	
+	
+    virtual std::string getName() const {
+        return name;
+    }
+
+	
     virtual void lay_egg() {
         std::cout << "Egg";
     }
 };
 
-class Ostrich : public Bird {
-public:
-    void fly() override {
-        throw std::runtime_error("Ostriches can't fly!");
-    }
+class FlyingBird : public Bird {
+	public:
+		virtual void fly() {
+			std::cout << "Bird is flying\n";
+		};
+	
 };
 
-class Eagle: public Bird {};
+
+class Ostrich : public Bird {
+public:
+
+    Ostrich() {
+        name = "Ostrich";
+    }
+
+    // void fly() override {
+        // throw std::runtime_error("Ostriches can't fly!");
+    // }
+};
+
+class Eagle: public FlyingBird {
+	
+	public:
+		Eagle() {
+			name = "Eagle";
+		}
+
+		void fly() {
+			std::cout << getName() << " is flying\n";
+		}
+
+};
 
 // For demonstration
 int main() {
@@ -29,5 +61,5 @@ int main() {
     eagle.fly();
 
     ostrich.lay_egg();
-    ostrich.fly();
+    //ostrich.fly();
 }
