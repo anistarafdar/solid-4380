@@ -9,7 +9,10 @@ public:
     Report(const std::string& t, const std::string& d) : title(t), data(d) {}
 };
 //take out side class
-    int processData(const Report& report) {
+
+class ReportProcessor{
+public:
+    static int process(const Report& report) {
         std::istringstream iss(report.data);
         int number, sum = 0;
         while (iss >> number) {
@@ -17,8 +20,10 @@ public:
         }
         return sum;
     }
-
-    std::string format(const Report& report) {
+};
+class ReportFormat{
+	public:
+    static std::string format(const Report& report) {
 		//int result = processData(report)
         return "<h1>" + report.title + "</h1>\n<p>" + report.title + ": " + std::to_string(processData(report)) + "</p>";
     }
@@ -28,5 +33,5 @@ public:
 // Included for demonstration
 int main() {
     Report report("Total sales", "51 42 39 60");
-    std::cout << report.format();
+    std::cout << ReportFormatter::format(report);
 }
