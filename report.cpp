@@ -7,9 +7,10 @@ public:
     std::string data;
 
     Report(const std::string& t, const std::string& d) : title(t), data(d) {}
-
-    int processData() {
-        std::istringstream iss(data);
+};
+//take out side class
+    int processData(const Report& report) {
+        std::istringstream iss(report.data);
         int number, sum = 0;
         while (iss >> number) {
             sum += number;
@@ -17,11 +18,12 @@ public:
         return sum;
     }
 
-    std::string format() {
-        return "<h1>" + title + "</h1>\n<p>" + title + ": " + std::to_string(processData()) + "</p>";
+    std::string format(const Report& report) {
+		//int result = processData(report)
+        return "<h1>" + report.title + "</h1>\n<p>" + report.title + ": " + std::to_string(processData(report)) + "</p>";
     }
 
-};
+
 
 // Included for demonstration
 int main() {
